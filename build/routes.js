@@ -45735,6 +45735,12 @@ export default {
               "comic-walker.com/detail/:id"
             ],
             "target": "/manga/:id"
+          },
+          {
+            "source": [
+              "comic-walker.com/detail/:id/episodes/:episodeId"
+            ],
+            "target": "/manga/:id"
           }
         ],
         "name": "漫画详情",
@@ -71874,6 +71880,162 @@ export default {
     ],
     "description": "",
     "lang": "zh-CN"
+  },
+  "ltn": {
+    "routes": {
+      "/def/:channel{.+}?": {
+        "path": "/def/:channel{.+}?",
+        "categories": [
+          "traditional-media"
+        ],
+        "example": "/ltn/def/breakingnewslist",
+        "parameters": {
+          "channel": {
+            "description": "Channel, see the table below",
+            "options": [
+              {
+                "value": "breakingnewslist",
+                "label": "軍情動態"
+              },
+              {
+                "value": "list/10",
+                "label": "國際軍情"
+              },
+              {
+                "value": "list/11",
+                "label": "台海軍情"
+              },
+              {
+                "value": "list/22",
+                "label": "軍情看板"
+              },
+              {
+                "value": "mitlist",
+                "label": "國防MIT"
+              },
+              {
+                "value": "list/12",
+                "label": "國機國造"
+              },
+              {
+                "value": "list/13",
+                "label": "國艦國造"
+              },
+              {
+                "value": "list/14",
+                "label": "潛艦國造"
+              },
+              {
+                "value": "list/23",
+                "label": "飛彈"
+              },
+              {
+                "value": "list/24",
+                "label": "戰甲車國造"
+              },
+              {
+                "value": "list/15",
+                "label": "國防產業"
+              },
+              {
+                "value": "list/25",
+                "label": "其他裝備"
+              },
+              {
+                "value": "pedialist",
+                "label": "軍武百科"
+              },
+              {
+                "value": "list/16",
+                "label": "圖解軍武"
+              },
+              {
+                "value": "list/17",
+                "label": "陸用裝備"
+              },
+              {
+                "value": "list/18",
+                "label": "海軍系統"
+              },
+              {
+                "value": "list/19",
+                "label": "空軍系統"
+              },
+              {
+                "value": "historylist",
+                "label": "國防祕辛"
+              },
+              {
+                "value": "stylelist",
+                "label": "軍風尚"
+              },
+              {
+                "value": "list/27",
+                "label": "將軍官邸故事"
+              },
+              {
+                "value": "list/28",
+                "label": "軍事風餐廳"
+              },
+              {
+                "value": "list/29",
+                "label": "軍風文創"
+              },
+              {
+                "value": "list/30",
+                "label": "軍風世界"
+              },
+              {
+                "value": "filelist",
+                "label": "軍武書摘"
+              },
+              {
+                "value": "forumlist",
+                "label": "自由講武堂"
+              },
+              {
+                "value": "list/20",
+                "label": "投書"
+              },
+              {
+                "value": "list/21",
+                "label": "論壇"
+              },
+              {
+                "value": "peoplelist",
+                "label": "軍情人物"
+              }
+            ],
+            "default": "breakingnewslist"
+          }
+        },
+        "radar": [
+          {
+            "source": [
+              "def.ltn.com.tw/:channel"
+            ],
+            "target": "/def/:channel"
+          },
+          {
+            "source": [
+              "def.ltn.com.tw/list/:id"
+            ],
+            "target": "/def/list/:id"
+          }
+        ],
+        "name": "自由軍武頻道",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "def.ltn.com.tw",
+        "location": "def.ts",
+        "module": () => import('@/routes/ltn/def.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "自由時報",
+    "url": "ltn.com.tw",
+    "lang": "zh-TW"
   },
   "luogu": {
     "routes": {
@@ -116430,7 +116592,7 @@ export default {
           "requireConfig": [
             {
               "name": "BILIBILI_COOKIE_*",
-              "description": "BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式：\n    1.  打开 [https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8](https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8)\n    2.  打开控制台，切换到 Network 面板，刷新\n    3.  点击 dynamic_new 请求，找到 Cookie\n    4.  视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie"
+              "description": "BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式：\n    1.  打开 [https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8](https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8)\n    2.  打开控制台，切换到 Network 面板，刷新\n    3.  点击 dynamic_new 请求，找到 Cookie\n    4.  复制整段 Cookie，删掉其中的 `bili_ticket` 和 `bili_ticket_expires` 字段来延长有效期"
             }
           ],
           "requirePuppeteer": false,
