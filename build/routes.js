@@ -137,10 +137,19 @@ export default {
           "requireConfig": false,
           "requirePuppeteer": false,
           "antiCrawler": false,
+          "supportRadar": true,
           "supportBT": false,
           "supportPodcast": true,
           "supportScihub": false
         },
+        "radar": [
+          {
+            "source": [
+              "music.163.com/djradio"
+            ],
+            "target": "/music/djradio/:id"
+          }
+        ],
         "name": "电台节目",
         "maintainers": [
           "magic-akari"
@@ -152,6 +161,14 @@ export default {
         "path": "/music/user/events/:id",
         "categories": [
           "multimedia"
+        ],
+        "radar": [
+          {
+            "source": [
+              "music.163.com/user/event"
+            ],
+            "target": "/music/user/events/:id"
+          }
         ],
         "name": "用户动态",
         "maintainers": [
@@ -173,10 +190,19 @@ export default {
           "requireConfig": false,
           "requirePuppeteer": false,
           "antiCrawler": false,
+          "supportRadar": true,
           "supportBT": false,
           "supportPodcast": false,
           "supportScihub": false
         },
+        "radar": [
+          {
+            "source": [
+              "music.163.com/user/home"
+            ],
+            "target": "/music/user/playlist/:id"
+          }
+        ],
         "name": "用户歌单",
         "maintainers": [
           "DIYgod"
@@ -228,10 +254,19 @@ export default {
           "requireConfig": false,
           "requirePuppeteer": false,
           "antiCrawler": false,
+          "supportRadar": true,
           "supportBT": false,
           "supportPodcast": false,
           "supportScihub": false
         },
+        "radar": [
+          {
+            "source": [
+              "music.163.com/artist"
+            ],
+            "target": "/music/artist/songs/:id"
+          }
+        ],
         "name": "歌手歌曲",
         "maintainers": [
           "ZhongMingKun"
@@ -252,10 +287,19 @@ export default {
           "requireConfig": false,
           "requirePuppeteer": false,
           "antiCrawler": false,
+          "supportRadar": true,
           "supportBT": false,
           "supportPodcast": false,
           "supportScihub": false
         },
+        "radar": [
+          {
+            "source": [
+              "music.163.com/artist/album"
+            ],
+            "target": "/music/artist/:id"
+          }
+        ],
         "name": "歌手专辑",
         "maintainers": [
           "metowolf"
@@ -282,10 +326,19 @@ export default {
           ],
           "requirePuppeteer": false,
           "antiCrawler": true,
+          "supportRadar": true,
           "supportBT": false,
           "supportPodcast": false,
           "supportScihub": false
         },
+        "radar": [
+          {
+            "source": [
+              "music.163.com/playlist"
+            ],
+            "target": "/music/playlist/:id"
+          }
+        ],
         "name": "歌单歌曲",
         "maintainers": [
           "DIYgod"
@@ -17460,54 +17513,6 @@ export default {
     "url": "orcid.org",
     "lang": "en"
   },
-  "pawchive": {
-    "routes": {
-      "/:service/:id": {
-        "path": "/:service/:id",
-        "categories": [
-          "anime"
-        ],
-        "example": "/pawchive/fanbox/22445",
-        "parameters": {
-          "service": "service, either `patreon` or `fanbox`",
-          "id": "User id, can be found in URL"
-        },
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false,
-          "nsfw": true
-        },
-        "radar": [
-          {
-            "source": [
-              "pawchive.st/"
-            ],
-            "target": ""
-          },
-          {
-            "source": [
-              "pawchive.st/:service/user/:id"
-            ],
-            "target": "/:service/:id"
-          }
-        ],
-        "name": "Posts",
-        "maintainers": [
-          "TonyRL"
-        ],
-        "location": "index.tsx",
-        "module": () => import('@/routes/pawchive/index.tsx')
-      }
-    },
-    "apiRoutes": {},
-    "name": "Pawchive",
-    "url": "pawchive.st",
-    "lang": "en"
-  },
   "pixabay": {
     "routes": {
       "/search/:q/:order?": {
@@ -17607,6 +17612,40 @@ export default {
     "name": "Rattibha",
     "url": "rattibha.com",
     "lang": "en"
+  },
+  "scmuseum": {
+    "routes": {
+      "/exhibition/:type?": {
+        "path": "/exhibition/:type?",
+        "categories": [
+          "travel"
+        ],
+        "example": "/scmuseum/exhibition/temp",
+        "parameters": {
+          "type": "Exhibition type, supported values: base (常设展览) or temp (临时展览), default is all exhibitions."
+        },
+        "name": "Exhibition",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.scmuseum.cn/Visit/Exhibition"
+            ],
+            "target": "/exhibition"
+          }
+        ],
+        "location": "exhibition.tsx",
+        "module": () => import('@/routes/scmuseum/exhibition.tsx')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Sichuan Museum",
+    "url": "www.scmuseum.cn",
+    "zh": {
+      "name": "四川博物院"
+    }
   },
   "sctv": {
     "routes": {
@@ -19358,8 +19397,8 @@ export default {
   },
   "daily": {
     "routes": {
-      "/discussed/:period?/:innerSharedContent?/:dateSort?": {
-        "path": "/discussed/:period?/:innerSharedContent?/:dateSort?",
+      "/discussed/:period?/:dateSort?": {
+        "path": "/discussed/:period?/:dateSort?",
         "example": "/daily/discussed/30",
         "view": 0,
         "radar": [
@@ -19375,20 +19414,6 @@ export default {
         ],
         "url": "app.daily.dev/discussed",
         "parameters": {
-          "innerSharedContent": {
-            "description": "Where to Fetch inner Shared Posts instead of original",
-            "default": "false",
-            "options": [
-              {
-                "value": "false",
-                "label": "False"
-              },
-              {
-                "value": "true",
-                "label": "True"
-              }
-            ]
-          },
           "dateSort": {
             "description": "Sort posts by publication date instead of popularity",
             "default": "true",
@@ -19425,8 +19450,8 @@ export default {
         "location": "discussed.ts",
         "module": () => import('@/routes/daily/discussed.ts')
       },
-      "/popular/:innerSharedContent?/:dateSort?": {
-        "path": "/popular/:innerSharedContent?/:dateSort?",
+      "/popular/:dateSort?": {
+        "path": "/popular/:dateSort?",
         "example": "/daily/popular",
         "view": 0,
         "radar": [
@@ -19437,20 +19462,6 @@ export default {
           }
         ],
         "parameters": {
-          "innerSharedContent": {
-            "description": "Where to Fetch inner Shared Posts instead of original",
-            "default": "false",
-            "options": [
-              {
-                "value": "false",
-                "label": "False"
-              },
-              {
-                "value": "true",
-                "label": "True"
-              }
-            ]
-          },
           "dateSort": {
             "description": "Sort posts by publication date instead of popularity",
             "default": "true",
@@ -19474,25 +19485,11 @@ export default {
         "location": "popular.ts",
         "module": () => import('@/routes/daily/popular.ts')
       },
-      "/source/:sourceId/:innerSharedContent?": {
-        "path": "/source/:sourceId/:innerSharedContent?",
+      "/source/:sourceId": {
+        "path": "/source/:sourceId",
         "example": "/daily/source/hn",
         "parameters": {
-          "sourceId": "The source id",
-          "innerSharedContent": {
-            "description": "Where to Fetch inner Shared Posts instead of original",
-            "default": "false",
-            "options": [
-              {
-                "value": "false",
-                "label": "False"
-              },
-              {
-                "value": "true",
-                "label": "True"
-              }
-            ]
-          }
+          "sourceId": "The source id"
         },
         "radar": [
           {
@@ -19509,26 +19506,10 @@ export default {
         "location": "source.ts",
         "module": () => import('@/routes/daily/source.ts')
       },
-      "/squads/:squads/:innerSharedContent?": {
-        "path": "/squads/:squads/:innerSharedContent?",
+      "/squads/:squads": {
+        "path": "/squads/:squads",
         "example": "/daily/squads/watercooler",
         "view": 0,
-        "parameters": {
-          "innerSharedContent": {
-            "description": "Where to Fetch inner Shared Posts instead of original",
-            "default": "false",
-            "options": [
-              {
-                "value": "false",
-                "label": "False"
-              },
-              {
-                "value": "true",
-                "label": "True"
-              }
-            ]
-          }
-        },
         "radar": [
           {
             "source": [
@@ -19544,8 +19525,8 @@ export default {
         "location": "squads.ts",
         "module": () => import('@/routes/daily/squads.ts')
       },
-      "/upvoted/:period?/:innerSharedContent?/:dateSort?": {
-        "path": "/upvoted/:period?/:innerSharedContent?/:dateSort?",
+      "/upvoted/:period?/:dateSort?": {
+        "path": "/upvoted/:period?/:dateSort?",
         "example": "/daily/upvoted/7",
         "view": 0,
         "radar": [
@@ -19556,20 +19537,6 @@ export default {
           }
         ],
         "parameters": {
-          "innerSharedContent": {
-            "description": "Where to Fetch inner Shared Posts instead of original",
-            "default": "false",
-            "options": [
-              {
-                "value": "false",
-                "label": "False"
-              },
-              {
-                "value": "true",
-                "label": "True"
-              }
-            ]
-          },
           "dateSort": {
             "description": "Sort posts by publication date instead of popularity",
             "default": "true",
@@ -19611,8 +19578,8 @@ export default {
         "location": "upvoted.ts",
         "module": () => import('@/routes/daily/upvoted.ts')
       },
-      "/user/:userId/:innerSharedContent?": {
-        "path": "/user/:userId/:innerSharedContent?",
+      "/user/:userId": {
+        "path": "/user/:userId",
         "example": "/daily/user/kramer",
         "radar": [
           {
@@ -19622,22 +19589,6 @@ export default {
             ]
           }
         ],
-        "parameters": {
-          "innerSharedContent": {
-            "description": "Where to Fetch inner Shared Posts instead of original",
-            "default": "false",
-            "options": [
-              {
-                "value": "false",
-                "label": "False"
-              },
-              {
-                "value": "true",
-                "label": "True"
-              }
-            ]
-          }
-        },
         "name": "User Posts",
         "maintainers": [
           "TonyRL"
@@ -19897,6 +19848,7 @@ export default {
               "optional": true
             }
           ],
+          "requirePuppeteer": true,
           "nsfw": true
         },
         "location": "index.ts",
@@ -26550,6 +26502,37 @@ export default {
     "name": "3DMGame",
     "url": "3dmgame.com",
     "lang": "zh-CN"
+  },
+  "3gmuseum": {
+    "routes": {
+      "/tempexhibition": {
+        "path": "/tempexhibition",
+        "categories": [
+          "travel"
+        ],
+        "example": "/3gmuseum/tempexhibition",
+        "name": "Temporary Exhibition",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.3gmuseum.cn/web/column/col5009287.html"
+            ],
+            "target": "/tempexhibition"
+          }
+        ],
+        "location": "exhibition.tsx",
+        "module": () => import('@/routes/3gmuseum/exhibition.tsx')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Chongqing China Three Gorges Museum",
+    "url": "www.3gmuseum.cn",
+    "zh": {
+      "name": "重庆中国三峡博物馆"
+    }
   },
   "3kns": {
     "routes": {
@@ -38714,6 +38697,64 @@ export default {
     "description": "Government of Canada news by department",
     "lang": "en"
   },
+  "capitalmuseum": {
+    "routes": {
+      "/exhibition/:type?": {
+        "path": "/exhibition/:type?",
+        "categories": [
+          "travel"
+        ],
+        "example": "/capitalmuseum/exhibition",
+        "parameters": {
+          "type": "Exhibition type, supported values: new(最新展览), review(展览回顾), default: All exhibitions."
+        },
+        "name": "Exhibitions",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.capitalmuseum.org.cn/exhibition"
+            ],
+            "target": "/exhibition"
+          }
+        ],
+        "location": "exhibition.tsx",
+        "module": () => import('@/routes/capitalmuseum/exhibition.tsx')
+      },
+      "/news/:type?": {
+        "path": "/news/:type?",
+        "categories": [
+          "travel"
+        ],
+        "example": "/capitalmuseum/news/notice",
+        "parameters": {
+          "type": "News type, supported values: news（新闻资讯）, notice（通知公告）. Default: All news."
+        },
+        "name": "News",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.capitalmuseum.org.cn/news"
+            ],
+            "target": "/news"
+          }
+        ],
+        "location": "news.ts",
+        "module": () => import('@/routes/capitalmuseum/news.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Capital Museum",
+    "url": "www.capitalmuseum.org.cn/",
+    "zh": {
+      "name": "首都博物馆"
+    }
+  },
   "cartoonmad": {
     "routes": {
       "/comic/:id": {
@@ -47237,6 +47278,64 @@ export default {
     "apiRoutes": {},
     "name": "中南大学",
     "url": "career.csu.edu.cn",
+    "lang": "zh-CN"
+  },
+  "csust": {
+    "routes": {
+      "/tggs": {
+        "path": "/tggs",
+        "categories": [
+          "university"
+        ],
+        "example": "/csust/tggs",
+        "features": {
+          "supportRadar": true
+        },
+        "radar": [
+          {
+            "source": [
+              "www.csust.edu.cn/tggs.htm",
+              "www.csust.edu.cn/"
+            ]
+          }
+        ],
+        "name": "通告公示",
+        "maintainers": [
+          "powerfullz"
+        ],
+        "url": "www.csust.edu.cn/tggs.htm",
+        "location": "tggs.ts",
+        "module": () => import('@/routes/csust/tggs.ts')
+      },
+      "/xkxs": {
+        "path": "/xkxs",
+        "categories": [
+          "university"
+        ],
+        "example": "/csust/xkxs",
+        "features": {
+          "supportRadar": true
+        },
+        "radar": [
+          {
+            "source": [
+              "www.csust.edu.cn/xkxs.htm",
+              "www.csust.edu.cn/"
+            ]
+          }
+        ],
+        "name": "学科学术",
+        "maintainers": [
+          "powerfullz"
+        ],
+        "url": "www.csust.edu.cn/xkxs.htm",
+        "location": "xkxs.ts",
+        "module": () => import('@/routes/csust/xkxs.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "长沙理工大学",
+    "url": "www.csust.edu.cn",
     "lang": "zh-CN"
   },
   "ctbu": {
@@ -57193,6 +57292,61 @@ export default {
     "name": "Prime Minister of Canada",
     "url": "pm.gc.ca",
     "lang": "en"
+  },
+  "gdmuseum": {
+    "routes": {
+      "/exhibition/:type?": {
+        "path": "/exhibition/:type?",
+        "categories": [
+          "travel"
+        ],
+        "example": "/gdmuseum/exhibition/temp",
+        "parameters": {
+          "type": "Exhibition type, supported values: temp(临时展览), default: All exhibitions."
+        },
+        "name": "Current Exhibitions",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.gdmuseum.org.cn/col9/list"
+            ],
+            "target": "/exhibition"
+          }
+        ],
+        "location": "exhibition.tsx",
+        "module": () => import('@/routes/gdmuseum/exhibition.tsx')
+      },
+      "/information": {
+        "path": "/information",
+        "categories": [
+          "travel"
+        ],
+        "example": "/gdmuseum/information",
+        "name": "Information",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.gdmuseum.org.cn/cn/col51/list"
+            ],
+            "target": "/information"
+          }
+        ],
+        "location": "news.ts",
+        "module": () => import('@/routes/gdmuseum/news.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Guangdong Museum",
+    "url": "gdmuseum.org.cn",
+    "zh": {
+      "name": "广东省博物馆"
+    }
   },
   "gdsrx": {
     "routes": {
@@ -87961,6 +88115,54 @@ export default {
     "url": "paulgraham.com",
     "lang": "en"
   },
+  "pawchive": {
+    "routes": {
+      "/:service/:id": {
+        "path": "/:service/:id",
+        "categories": [
+          "anime"
+        ],
+        "example": "/pawchive/fanbox/22445",
+        "parameters": {
+          "service": "service, either `patreon` or `fanbox`",
+          "id": "User id, can be found in URL"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "pawchive.pw/"
+            ],
+            "target": ""
+          },
+          {
+            "source": [
+              "pawchive.pw/:service/user/:id"
+            ],
+            "target": "/:service/:id"
+          }
+        ],
+        "name": "Posts",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "location": "index.tsx",
+        "module": () => import('@/routes/pawchive/index.tsx')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Pawchive",
+    "url": "pawchive.pw",
+    "lang": "en"
+  },
   "pconline": {
     "routes": {
       "/focus/:category?": {
@@ -101205,6 +101407,37 @@ export default {
     "url": "ylxx.szftedu.cn",
     "lang": "zh-CN"
   },
+  "szmuseum": {
+    "routes": {
+      "/temporary": {
+        "path": "/temporary",
+        "categories": [
+          "travel"
+        ],
+        "example": "/szmuseum/temporary",
+        "name": "Special Exhibition",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.szmuseum.com/Exhibition/Temporary"
+            ],
+            "target": "/temporary"
+          }
+        ],
+        "location": "temporary.tsx",
+        "module": () => import('@/routes/szmuseum/temporary.tsx')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Suzhou Museum",
+    "url": "www.szmuseum.com",
+    "zh": {
+      "name": "苏州博物馆"
+    }
+  },
   "szse": {
     "routes": {
       "/inquire/:category?/:select?/:keyword?": {
@@ -103862,6 +104095,58 @@ export default {
     "name": "腾讯研究院",
     "url": "tisi.org",
     "lang": "zh-CN"
+  },
+  "tjbwg": {
+    "routes": {
+      "/exhibition": {
+        "path": "/exhibition",
+        "categories": [
+          "travel"
+        ],
+        "example": "/tjbwg/exhibition",
+        "radar": [
+          {
+            "source": [
+              "www.tjbwg.cn/cn/ExhibitionList.aspx"
+            ],
+            "target": "/exhibition"
+          }
+        ],
+        "name": "Temporary Exhibition",
+        "maintainers": [
+          "magazian"
+        ],
+        "location": "exhibition.tsx",
+        "module": () => import('@/routes/tjbwg/exhibition.tsx')
+      },
+      "/news": {
+        "path": "/news",
+        "categories": [
+          "travel"
+        ],
+        "example": "/tjbwg/news",
+        "name": "News",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.tjbwg.cn/cn/NewsList.aspx"
+            ],
+            "target": "/news"
+          }
+        ],
+        "location": "news.ts",
+        "module": () => import('@/routes/tjbwg/news.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Tianjin Museum",
+    "url": "www.tjbwg.cn",
+    "zh": {
+      "name": "天津博物馆"
+    }
   },
   "tju": {
     "routes": {
@@ -109781,12 +110066,17 @@ export default {
             "target": ""
           }
         ],
-        "name": "Unknown",
+        "name": "发现",
+        "example": "/xiaoyuzhou",
+        "categories": [
+          "multimedia"
+        ],
         "maintainers": [
           "prnake",
           "Maecenas"
         ],
         "url": "xiaoyuzhoufm.com/",
+        "description": "::: warning\n小宇宙的 api 需要验证 `x-jike-device-id`、`x-jike-access-token` 和 `x-jike-refresh-token` 。必要时需要自行配置，具体见部署文档。\n:::",
         "location": "pickup.ts",
         "module": () => import('@/routes/xiaoyuzhou/pickup.ts')
       },
@@ -113223,6 +113513,32 @@ export default {
         ],
         "location": "list.ts",
         "module": () => import('@/routes/zju/list.ts')
+      },
+      "/math/:type": {
+        "path": "/math/:type",
+        "categories": [
+          "university"
+        ],
+        "example": "/zju/math/0",
+        "parameters": {
+          "type": "分类，见下表"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "数学科学学院",
+        "description": "| 重要通知 | 本科生 | 研究生 | 科研 | 教学 | 人事 | 公示 |\n| -------- | ------ | ------ | ---- | ---- | ---- | ---- |\n| 0        | 1      | 2      | 3    | 4    | 5    | 6    |",
+        "maintainers": [
+          "Alex222222222222"
+        ],
+        "url": "www.math.zju.edu.cn",
+        "location": "math/index.ts",
+        "module": () => import('@/routes/zju/math/index.ts')
       },
       "/physics/:type": {
         "path": "/physics/:type",
@@ -119239,76 +119555,6 @@ export default {
       "programming"
     ],
     "lang": "en"
-  },
-  "csust": {
-    "routes": {
-      "/tggs": {
-        "path": "/tggs",
-        "categories": [
-          "university"
-        ],
-        "example": "/csust/tggs",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "www.csust.edu.cn/tggs.htm",
-              "www.csust.edu.cn/"
-            ]
-          }
-        ],
-        "name": "通告公示",
-        "maintainers": [
-          "powerfullz"
-        ],
-        "url": "www.csust.edu.cn/tggs.htm",
-        "location": "tggs.ts",
-        "module": () => import('@/routes/csust/tggs.ts')
-      },
-      "/xkxs": {
-        "path": "/xkxs",
-        "categories": [
-          "university"
-        ],
-        "example": "/csust/xkxs",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "www.csust.edu.cn/xkxs.htm",
-              "www.csust.edu.cn/"
-            ]
-          }
-        ],
-        "name": "学科学术",
-        "maintainers": [
-          "powerfullz"
-        ],
-        "url": "www.csust.edu.cn/xkxs.htm",
-        "location": "xkxs.ts",
-        "module": () => import('@/routes/csust/xkxs.ts')
-      }
-    },
-    "apiRoutes": {},
-    "name": "长沙理工大学",
-    "url": "www.csust.edu.cn",
-    "lang": "zh-CN"
   },
   "cw": {
     "routes": {
@@ -143746,6 +143992,90 @@ export default {
     "url": "youtube.com",
     "lang": "en"
   },
+  "tophub": {
+    "routes": {
+      "/:id": {
+        "path": "/:id",
+        "categories": [
+          "new-media"
+        ],
+        "example": "/tophub/Om4ejxvxEN",
+        "parameters": {
+          "id": "榜单id，可在 URL 中找到"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "TOPHUB_COOKIE",
+              "optional": true,
+              "description": ""
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "tophub.today/n/:id"
+            ]
+          }
+        ],
+        "name": "榜单",
+        "maintainers": [
+          "LogicJake"
+        ],
+        "location": "index.ts",
+        "module": () => import('@/routes/tophub/index.ts')
+      },
+      "/list/:id": {
+        "path": "/list/:id",
+        "categories": [
+          "new-media"
+        ],
+        "example": "/tophub/list/Om4ejxvxEN",
+        "parameters": {
+          "id": "榜单id，可在 URL 中找到"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "TOPHUB_COOKIE",
+              "optional": true,
+              "description": ""
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "tophub.today/n/:id"
+            ]
+          }
+        ],
+        "name": "榜单列表",
+        "maintainers": [
+          "akynazh"
+        ],
+        "description": "::: tip\n将榜单条目集合到一个列表中，且有热度排序，可避免推送大量条目。\n:::",
+        "location": "list.tsx",
+        "module": () => import('@/routes/tophub/list.tsx')
+      }
+    },
+    "apiRoutes": {},
+    "name": "今日热榜",
+    "url": "tophub.today",
+    "description": "::: warning\n由于需要登录后的 Cookie 值才能获取原始链接，所以需要自建，需要在环境变量中配置 `TOPHUB_COOKIE`，详情见部署页面的配置模块。\n:::",
+    "lang": "zh-CN"
+  },
   "economist": {
     "routes": {
       "/global-business-review/:language?": {
@@ -143850,89 +144180,5 @@ export default {
     "name": "The Economist",
     "url": "economist.com",
     "lang": "en"
-  },
-  "tophub": {
-    "routes": {
-      "/:id": {
-        "path": "/:id",
-        "categories": [
-          "new-media"
-        ],
-        "example": "/tophub/Om4ejxvxEN",
-        "parameters": {
-          "id": "榜单id，可在 URL 中找到"
-        },
-        "features": {
-          "requireConfig": [
-            {
-              "name": "TOPHUB_COOKIE",
-              "optional": true,
-              "description": ""
-            }
-          ],
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "tophub.today/n/:id"
-            ]
-          }
-        ],
-        "name": "榜单",
-        "maintainers": [
-          "LogicJake"
-        ],
-        "location": "index.ts",
-        "module": () => import('@/routes/tophub/index.ts')
-      },
-      "/list/:id": {
-        "path": "/list/:id",
-        "categories": [
-          "new-media"
-        ],
-        "example": "/tophub/list/Om4ejxvxEN",
-        "parameters": {
-          "id": "榜单id，可在 URL 中找到"
-        },
-        "features": {
-          "requireConfig": [
-            {
-              "name": "TOPHUB_COOKIE",
-              "optional": true,
-              "description": ""
-            }
-          ],
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "tophub.today/n/:id"
-            ]
-          }
-        ],
-        "name": "榜单列表",
-        "maintainers": [
-          "akynazh"
-        ],
-        "description": "::: tip\n将榜单条目集合到一个列表中，且有热度排序，可避免推送大量条目。\n:::",
-        "location": "list.tsx",
-        "module": () => import('@/routes/tophub/list.tsx')
-      }
-    },
-    "apiRoutes": {},
-    "name": "今日热榜",
-    "url": "tophub.today",
-    "description": "::: warning\n由于需要登录后的 Cookie 值才能获取原始链接，所以需要自建，需要在环境变量中配置 `TOPHUB_COOKIE`，详情见部署页面的配置模块。\n:::",
-    "lang": "zh-CN"
   }
 }
